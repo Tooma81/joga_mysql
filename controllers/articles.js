@@ -25,7 +25,21 @@ const getArticleBySlug = (req, res) => {
     })
 } 
 
+const getArticlesByAuthor = (req, res) => {
+    let sql = `SELECT * FROM author WHERE id = ${req.params.author_id}`
+    db.query(sql, (error, result) => {
+        let id = result[0].id 
+        let name = result[0].name 
+        res.render('author', {
+            author: result
+        })
+    })
+   
+
+} 
+
 module.exports = {
     getAllArticles,
-    getArticleBySlug
+    getArticleBySlug,
+    getArticlesByAuthor
 } 
